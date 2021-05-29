@@ -21,14 +21,11 @@
                <a href="{{ route('category') }}" class="nav-link">Categories</a>
             </li>
             <li class="nav-item">
-               <a href="#" class="nav-link">Rewards</a>
-            </li>
-            <li class="nav-item">
-               <a href="/register.html" class="nav-link">Sign Up</a>
+               <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
             </li>
             <li class="nav-item">
                <a
-                  href="/login.html"
+                  href="{{ route('login') }}"
                   class="btn btn-success nav-link px-4 text-white">Sign In</a>
             </li>
          </ul>

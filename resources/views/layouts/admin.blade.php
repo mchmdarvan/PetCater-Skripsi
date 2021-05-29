@@ -14,6 +14,8 @@
    @stack('prepend-style')
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
    <link href="/style/main.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.css" />
    @stack('addon-style')
 </head>
 
@@ -23,19 +25,25 @@
          <!-- Sidebar -->
          <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading text-center">
-               <img src="/images/dashboard-store-logo.svg" class="my-4" />
+               <img src="/images/admin.png" class="my-4" style="width: 150px" />
             </div>
             <div class="list-group list-group-flush">
                <a
-                  href="{{ route('dashboard') }}"
-                  class="list-group-item list-group-item-action active">Dashboard</a>
+                  href="{{ route('admin-dashboard') }}"
+                  class="list-group-item list-group-item-action {{ request()->is('admin') ? 'active' : '' }}">Dashboard</a>
                <a
-                  href="{{ route('dashboard-transaction') }}"
+                  href="{{ route('product.index') }}"
+                  class="list-group-item list-group-item-action {{ request()->is('admin/product*') ? 'active' : '' }}">Products</a>
+               <a
+                  href="{{ route('category.index') }}"
+                  class="list-group-item list-group-item-action {{ request()->is('admin/category*') ? 'active' : '' }}">Categories</a>
+               <a
+                  href="#"
                   class="list-group-item list-group-item-action">Transactions</a>
                <a
-                  href="{{ route('dashboard-setting-account') }}"
-                  class="list-group-item list-group-item-action">My Account</a>
-               <a href="{{ route('home') }}" class="list-group-item list-group-item-action">Sign
+                  href="#"
+                  class="list-group-item list-group-item-action">User</a>
+               <a href="#" class="list-group-item list-group-item-action">Sign
                   Out</a>
             </div>
          </div>
@@ -81,21 +89,12 @@
                               <a href="/" class="dropdown-item">Logout</a>
                            </div>
                         </li>
-                        <li class="nav-item">
-                           <a href="/" class="nav-link d-inline-block mt-2">
-                              <img src="/images/icon-cart-filled.svg" />
-                              <div class="card-badge">3</div>
-                           </a>
-                        </li>
                      </ul>
 
                      <!-- Mobile Menu -->
                      <ul class="navbar-nav d-block d-lg-none">
                         <li class="nav-item">
                            <a href="#" class="nav-link"> Hi, Angga </a>
-                        </li>
-                        <li class="nav-item">
-                           <a href="#" class="nav-link d-inline-block"> Cart </a>
                         </li>
                      </ul>
                   </div>
@@ -110,8 +109,10 @@
 
    <!-- Bootstrap core JavaScript -->
    @stack('prepend-script')
-   <script src="/vendor/jquery/jquery.slim.min.js"></script>
+   <script src="/vendor/jquery/jquery.min.js"></script>
    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script type="text/javascript"
+      src="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.js"></script>
    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    <script>
       AOS.init();

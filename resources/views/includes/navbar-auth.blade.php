@@ -20,9 +20,6 @@
             <li class="nav-item">
                <a href="{{ route('category') }}" class="nav-link">Categories</a>
             </li>
-            <li class="nav-item">
-               <a href="#" class="nav-link">Rewards</a>
-            </li>
          </ul>
       </div>
    </div>

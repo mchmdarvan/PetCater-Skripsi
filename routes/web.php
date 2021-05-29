@@ -25,22 +25,22 @@ Route::get('/success', 'CartsController@success')->name('success');
 
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
 
-Route::get('/dashboard/product', 'DashboardProductController@index')
-    ->name('dashboard-product');
-Route::get('/dashboard/product/add', 'DashboardProductController@create')
-    ->name('dashboard-product-create');
-Route::get('/dashboard/product/{id}', 'DashboardProductController@details')
-    ->name('dashboard-product-details');
+    Route::get('/transactions', 'DashboardTransactionController@index')
+        ->name('dashboard-transaction');
+    Route::get('/transactions/{id}', 'DashboardTransactionController@details')
+        ->name('dashboard-transaction-details');
 
-Route::get('/dashboard/transactions', 'DashboardTransactionController@index')
-    ->name('dashboard-transaction');
-Route::get('/dashboard/transactions/{id}', 'DashboardTransactionController@details')
-    ->name('dashboard-transaction-details');
+    Route::get('/account', 'DashboardSettingController@account')
+        ->name('dashboard-setting-account');
+});
 
-Route::get('/dashboard/setting', 'DashboardSettingController@store')
-    ->name('dashboard-setting-store');
-Route::get('/dashboard/account', 'DashboardSettingController@account')
-    ->name('dashboard-setting-account');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'Admin\DashboardController@index')->name('admin-dashboard');
+    Route::resource('category', 'Admin\CategoryController');
+    Route::resource('product', 'Admin\ProductController');
+});
+
 Auth::routes();

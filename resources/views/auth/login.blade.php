@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+   Sign In Page
+@endsection
+
 @section('content')
 
    <div class="page-content page-auth">
