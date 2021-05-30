@@ -22,7 +22,7 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'categories_id');
     }
 
-    public function gallery()
+    public function galleries()
     {
         return $this->hasMany(ProductGallery::class, 'products_id', 'id');
     }

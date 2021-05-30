@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/categories', 'CategoriesController@index')->name('category');
+Route::get('/categories/{id}', 'CategoryController@details')->name('categories-details');
 
-Route::get('/details/{id}', 'DetailsController@index')->name('detail');
+Route::get('/details/{id}', 'DetailsController@index')->name('details');
 
 Route::get('/cart', 'CartsController@index')->name('cart');
 Route::delete('/cart/{id}', 'CartsController@delete')->name('cart-delete');
@@ -41,6 +42,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'Admin\DashboardController@index')->name('admin-dashboard');
     Route::resource('category', 'Admin\CategoryController');
     Route::resource('product', 'Admin\ProductController');
+    Route::resource('product-gallery', 'Admin\ProductGalleryController');
+    Route::resource('user', 'Admin\UserController');
+    Route::get('change-role/{id}', 'Admin\UserController@changeRole')->name('user.changeRole');
 });
 
 Auth::routes();

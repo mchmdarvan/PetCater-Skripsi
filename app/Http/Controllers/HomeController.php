@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+
 class HomeController extends Controller
 {
     /**
@@ -11,6 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        $categories = Category::take(6)->get();
+        $products = Product::with(['galleries'])->take(8)->orderBy('created_at', 'ASC')->get();
+        return view('pages.home', [
+            'categories' => $categories,
+            'products' => $products,
+        ]);
     }
 }
