@@ -16,17 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/categories', 'CategoriesController@index')->name('category');
-Route::get('/categories/{id}', 'CategoryController@details')->name('categories-details');
+Route::get('/categories/{id}', 'CategoriesController@details')->name('categories-details');
 
 Route::get('/details/{id}', 'DetailsController@index')->name('details');
+Route::post('/details-add/{id}', 'DetailsController@add')->name('details-add');
 
 Route::get('/cart', 'CartsController@index')->name('cart');
-Route::delete('/cart/{id}', 'CartsController@delete')->name('cart-delete');
+Route::delete('/cart/{id}', 'CartsController@destroy')->name('cart-delete');
 Route::get('/success', 'CartsController@success')->name('success');
 
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
 
-Route::group(['prefix' => 'dashboard'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::get('/transactions', 'DashboardTransactionController@index')
@@ -38,7 +39,7 @@ Route::group(['prefix' => 'dashboard'], function () {
         ->name('dashboard-setting-account');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'admin'], function () {
     Route::get('/', 'Admin\DashboardController@index')->name('admin-dashboard');
     Route::resource('category', 'Admin\CategoryController');
     Route::resource('product', 'Admin\ProductController');

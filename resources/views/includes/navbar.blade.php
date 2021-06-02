@@ -18,7 +18,7 @@
                <a href="{{ route('home') }}" class="nav-link">Home</a>
             </li>
             <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
-               <a href="{{ route('categories') }}" class="nav-link">Categories</a>
+               <a href="{{ route('category') }}" class="nav-link">Categories</a>
             </li>
             @guest
                <li class="nav-item">
@@ -48,7 +48,12 @@
                      Hi, {{ Auth::user()->name }}
                   </a>
                   <div class="dropdown-menu">
-                     <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
+                     @if (auth()->user()->roles == 'ADMIN')
+                        <a href="{{ route('admin-dashboard') }}" class="dropdown-item">Admin
+                           Dashboard</a>
+                     @else
+                        <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
+                     @endif
                      <a href="{{ route('dashboard-setting-account') }}"
                         class="dropdown-item">Settings</a>
                      <div class="dropdown-divider"></div>
@@ -62,8 +67,16 @@
                   </div>
                </li>
                <li class="nav-item">
-                  <a href="/" class="nav-link d-inline-block mt-2">
-                     <img src="/images/icon-cart-empty.svg" />
+                  <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
+                     @php
+                        $carts = \App\Models\Cart::where('users_id', auth()->user()->id)->count();
+                     @endphp
+                     @if ($carts > 0)
+                        <img src="/images/icon-cart-filled.svg" />
+                        <div class="card-badge">{{ $carts }}</div>
+                     @else
+                        <img src="/images/icon-cart-empty.svg" />
+                     @endif
                   </a>
                </li>
             </ul>
@@ -71,10 +84,20 @@
             <!-- Mobile Menu -->
             <ul class="navbar-nav d-block d-lg-none">
                <li class="nav-item">
-                  <a href="#" class="nav-link"> Hi, {{ Auth::user()->name }} </a>
+                  <a href="{{ route('dashboard-setting-account') }}" class="nav-link"> Hi,
+                     {{ Auth::user()->name }} </a>
                </li>
                <li class="nav-item">
-                  <a href="#" class="nav-link d-inline-block"> Cart </a>
+                  <a href="{{ route('cart') }}" class="nav-link d-inline-block"> Cart </a>
+               </li>
+               <li class="nav-item">
+                  <a href="{{ route('logout') }}"
+                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                     class="nav-link">Logout</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                     class="d-none">
+                     @csrf
+                  </form>
                </li>
             </ul>
          @endauth

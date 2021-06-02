@@ -46,8 +46,13 @@
                <a
                   href="{{ route('user.index') }}"
                   class="list-group-item list-group-item-action {{ request()->is('admin/user*') ? 'active' : '' }}">User</a>
-               <a href="#" class="list-group-item list-group-item-action">Sign
-                  Out</a>
+               <a href="{{ route('logout') }}"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                  class="list-group-item list-group-item-action">Logout</a>
+               <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                  class="d-none">
+                  @csrf
+               </form>
             </div>
          </div>
 
@@ -83,13 +88,18 @@
                                  src="/images/icon-user.png"
                                  alt=""
                                  class="rounded-circle mr-2 profile-picture" />
-                              Hi, Angga
+                              Hi, {{ Auth::user()->name }}
                            </a>
                            <div class="dropdown-menu">
-                              <a href="/dashboard.html" class="dropdown-item">Dashboard</a>
-                              <a href="/dashboard-account.html" class="dropdown-item">Settings</a>
+                              <a href="{{ route('home') }}" class="dropdown-item">Dashboard</a>
                               <div class="dropdown-divider"></div>
-                              <a href="/" class="dropdown-item">Logout</a>
+                              <a href="{{ route('logout') }}"
+                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                 class="dropdown-item">Logout</a>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                 class="d-none">
+                                 @csrf
+                              </form>
                            </div>
                         </li>
                      </ul>
@@ -98,6 +108,15 @@
                      <ul class="navbar-nav d-block d-lg-none">
                         <li class="nav-item">
                            <a href="#" class="nav-link"> Hi, Angga </a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="{{ route('logout') }}"
+                              onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                              class="nav-link">Logout</a>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              class="d-none">
+                              @csrf
+                           </form>
                         </li>
                      </ul>
                   </div>
