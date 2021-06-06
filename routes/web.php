@@ -37,6 +37,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
     Route::get('/account', 'DashboardSettingController@account')
         ->name('dashboard-setting-account');
+    Route::post('/account/{redirect}', 'DashboardSettingController@update')
+        ->name('dashboard-setting-redirect');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'admin'], function () {

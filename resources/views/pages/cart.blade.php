@@ -176,10 +176,6 @@
                </div>
                <div class="row" data-aos="fade-up" data-aos-delay="300">
                   <div class="col-4 col-md-2">
-                     <div class="product-title">$580</div>
-                     <div class="product-subtitle">Ship to Jakarta</div>
-                  </div>
-                  <div class="col-4 col-md-2">
                      <div class="product-title text-success">@currency($totalPrice ?? 0)</div>
                      <div class="product-subtitle">Total</div>
                   </div>

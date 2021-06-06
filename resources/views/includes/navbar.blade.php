@@ -41,10 +41,18 @@
                      id="navbarDropdown"
                      role="button"
                      data-toggle="dropdown">
-                     <img
-                        src="/images/icon-user.png"
-                        alt=""
-                        class="rounded-circle mr-2 profile-picture" />
+                     @if (auth()->user()->photo == null)
+                        <img
+                           src="/images/icon-user.png"
+                           alt=""
+                           class="rounded-circle mr-2 profile-picture" />
+                     @else
+                        <img
+                           src="{{ Storage::url(auth()->user()->photo) }}"
+                           alt=""
+                           class="rounded-circle mr-2 profile-picture" />
+                     @endif
+
                      Hi, {{ Auth::user()->name }}
                   </a>
                   <div class="dropdown-menu">

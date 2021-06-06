@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardSettingController extends Controller
 {
     public function account()
     {
-        $user = auth()->user()->id;
+        $user = Auth::user();
         return view('pages.dashboard.dashboard-account', [
             'user' => $user,
         ]);
     }
 
-    public function save(UserRequest $request)
+    public function update(Request $request, $redirect)
     {
-        $users = auth()->user()->id;
         $data = $request->all();
+        $data['photo'] = $request->file('photo')->store('assets/users', 'public');
+        $item = Auth::user();
 
-        $users->save($data);
-        return redirect()->route('dashboard-setting-account');
+        $item->update($data);
+
+        return redirect()->route($redirect);
     }
 }

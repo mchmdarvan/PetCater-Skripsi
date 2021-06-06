@@ -75,7 +75,7 @@
                               role="button"
                               data-toggle="dropdown">
                               <img
-                                 src="/images/icon-user.png"
+                                 src="{{ Storage::url(auth()->user()->photo) }}"
                                  alt=""
                                  class="rounded-circle mr-2 profile-picture" />
                               Hi, {{ auth()->user()->name }}
