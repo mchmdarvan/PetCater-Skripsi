@@ -9,7 +9,7 @@
    <meta name="description" content="" />
    <meta name="author" content="" />
 
-   <title>@yield('title')</title>
+   <title><img src="/images/logo-enzo.png">@yield('title')</title>
 
    @stack('prepend-style')
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -23,9 +23,12 @@
          <!-- Sidebar -->
          <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading text-center">
-               <img src="/images/dashboard-store-logo.svg" class="my-4" />
+               <img src="/images/logo-enzo.png" class="my-4" style="width: 150px" />
             </div>
             <div class="list-group list-group-flush">
+               <a
+                  href="{{ route('home') }}"
+                  class="list-group-item list-group-item-action">Home</a>
                <a
                   href="{{ route('dashboard') }}"
                   class="list-group-item list-group-item-action {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
@@ -74,10 +77,17 @@
                               id="navbarDropdown"
                               role="button"
                               data-toggle="dropdown">
-                              <img
-                                 src="{{ Storage::url(auth()->user()->photo) }}"
-                                 alt=""
-                                 class="rounded-circle mr-2 profile-picture" />
+                              @if (auth()->user()->photo == null)
+                                 <img
+                                    src="/images/icon_user.png"
+                                    alt=""
+                                    class="rounded-circle mr-2 profile-picture" />
+                              @else
+                                 <img
+                                    src="{{ Storage::url(auth()->user()->photo) }}"
+                                    alt=""
+                                    class="rounded-circle mr-2 profile-picture" />
+                              @endif
                               Hi, {{ auth()->user()->name }}
                            </a>
                            <div class="dropdown-menu">

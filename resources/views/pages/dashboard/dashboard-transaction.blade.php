@@ -42,7 +42,32 @@
                         id="pills-buy"
                         role="tabpanel"
                         aria-labelledby="pills-buy-tab">
-                        <a
+                        @foreach ($transactions as $transaction)
+                           <a href="{{ route('dashboard-transaction-details', $transaction->code) }}"
+                              class="card card-list d-block">
+                              <div class="card-body">
+                                 <div class="row">
+                                    <div class="col-md-1">
+                                       <img
+                                          src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
+                                          class="w-75 rounded" />
+                                    </div>
+                                    <div class="col-md-4">{{ $transaction->product->name ?? '' }}
+                                    </div>
+                                    <div class="col-md-2">{{ $transaction->transaction->code }}</div>
+                                    <div class="col-md-3">
+                                       {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') ?? '' }}
+                                    </div>
+                                    <div class="col-md-2 d-none d-md-block">
+                                       <img
+                                          src="/images/dashboard-arrow-right.svg"
+                                          alt="" />
+                                    </div>
+                                 </div>
+                              </div>
+                           </a>
+                        @endforeach
+                        {{-- <a
                            href="/dashboard-transactions-details.html"
                            class="card card-list d-block">
                            <div class="card-body">
@@ -62,49 +87,7 @@
                                  </div>
                               </div>
                            </div>
-                        </a>
-                        <a
-                           href="/dashboard-transactions-details.html"
-                           class="card card-list d-block">
-                           <div class="card-body">
-                              <div class="row">
-                                 <div class="col-md-1">
-                                    <img
-                                       src="/images/dashboard-icon-product-2.png"
-                                       alt="" />
-                                 </div>
-                                 <div class="col-md-4">LeBrone X</div>
-                                 <div class="col-md-3">Muchamad Arvan</div>
-                                 <div class="col-md-3">11 Januari, 2020</div>
-                                 <div class="col-md-1 d-none d-md-block">
-                                    <img
-                                       src="/images/dashboard-arrow-right.svg"
-                                       alt="" />
-                                 </div>
-                              </div>
-                           </div>
-                        </a>
-                        <a
-                           href="/dashboard-transactions-details.html"
-                           class="card card-list d-block">
-                           <div class="card-body">
-                              <div class="row">
-                                 <div class="col-md-1">
-                                    <img
-                                       src="/images/dashboard-icon-product-3.png"
-                                       alt="" />
-                                 </div>
-                                 <div class="col-md-4">Soffa Lembutte</div>
-                                 <div class="col-md-3">Rizka Aulia</div>
-                                 <div class="col-md-3">11 Januari, 2020</div>
-                                 <div class="col-md-1 d-none d-md-block">
-                                    <img
-                                       src="/images/dashboard-arrow-right.svg"
-                                       alt="" />
-                                 </div>
-                              </div>
-                           </div>
-                        </a>
+                        </a> --}}
                      </div>
                   </div>
                </div>

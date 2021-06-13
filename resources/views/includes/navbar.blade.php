@@ -43,7 +43,7 @@
                      data-toggle="dropdown">
                      @if (auth()->user()->photo == null)
                         <img
-                           src="/images/icon-user.png"
+                           src="/images/icon_user.png"
                            alt=""
                            class="rounded-circle mr-2 profile-picture" />
                      @else
@@ -75,17 +75,21 @@
                   </div>
                </li>
                <li class="nav-item">
-                  <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
-                     @php
-                        $carts = \App\Models\Cart::where('users_id', auth()->user()->id)->count();
-                     @endphp
-                     @if ($carts > 0)
-                        <img src="/images/icon-cart-filled.svg" />
-                        <div class="card-badge">{{ $carts }}</div>
-                     @else
-                        <img src="/images/icon-cart-empty.svg" />
-                     @endif
-                  </a>
+                  @if (auth()->user()->roles == 'USER')
+                     <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
+                        @php
+                           $carts = \App\Models\Cart::where('users_id', auth()->user()->id)->count();
+                        @endphp
+                        @if ($carts > 0)
+                           <img src="/images/icon-cart-filled.svg" />
+                           <div class="card-badge">{{ $carts }}</div>
+                        @else
+                           <img src="/images/icon-cart-empty.svg" />
+                        @endif
+                     </a>
+                  @else
+
+                  @endif
                </li>
             </ul>
 

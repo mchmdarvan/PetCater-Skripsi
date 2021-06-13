@@ -33,7 +33,7 @@ class ProductController extends Controller
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="' . route('product.edit', $item->id) . '">
+                                    <a class="dropdown-item" href="' . route('product.edit', $item->slug) . '">
                                         Edit
                                     </a>
                                     <form action="' . route('product.destroy', $item->id) . '" method="POST">
@@ -103,7 +103,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $item = Product::findOrFail($id);
+        $item = Product::where('slug', $id)->firstOrFail();
         $categories = Category::all();
 
         return view('pages.admin.product.edit', [

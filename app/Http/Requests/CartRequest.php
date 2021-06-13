@@ -25,6 +25,7 @@ class CartRequest extends FormRequest
     {
         return [
             'products_id' => 'integer|exists:products,id',
+            'qty' => 'required|integer',
         ];
     }
 }

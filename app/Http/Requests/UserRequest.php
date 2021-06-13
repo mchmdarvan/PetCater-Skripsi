@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
             'regencies_id' => 'integer|exists:regencies,id',
             'zipcode' => 'integer|max:5',
             'phone_number' => 'string|max:13',
+            'photo' => 'image',
         ];
     }
 }

@@ -17,7 +17,7 @@
                   <nav>
                      <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                           <a href="/index.html">Home</a>
+                           <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item active">Cart</li>
                      </ol>
@@ -36,6 +36,7 @@
                            <td>Image</td>
                            <td>Name &amp; Seller</td>
                            <td>Price</td>
+                           <td>Quantity</td>
                            <td>Menu</td>
                         </tr>
                      </thead>
@@ -51,15 +52,21 @@
                                        src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
                                        alt=""
                                        class="cart-image w-100" />
+                                 @else
+                                    <div class="cart-image w-100" style="background-color: #eeeee">
+                                    </div>
                                  @endif
                               </td>
                               <td style="width: 35%">
                                  <div class="product-title">{{ $cart->product->name }}</div>
                                  <div class="product-subtitle">by Enzo Petshop and Clinic</div>
                               </td>
-                              <td style="width: 35%">
+                              <td style="width: 25%">
                                  <div class="product-title">@currency($cart->product->price)</div>
                                  <div class="product-subtitle">Rupiah</div>
+                              </td>
+                              <td style="width: 15%">
+                                 <div class="product-title">{{ $cart->qty }}</div>
                               </td>
                               <td style="width: 20%">
                                  <form method="POST" action="{{ route('cart-delete', $cart->id) }}">
@@ -72,7 +79,7 @@
                               </td>
                            </tr>
                            @php
-                              $totalPrice += $cart->product->price;
+                              $totalPrice += $cart->product->price * $cart->qty;
                            @endphp
                         @empty
                            <tr>
@@ -94,7 +101,10 @@
                   <h2 class="mb-4">Shipping Details</h2>
                </div>
             </div>
-            <form action="" id="locations">
+            <form action="{{ route('checkout') }}" id="locations" enctype="multipart/form-data"
+               method="POST">
+               @csrf
+               <input type="hidden" name="total_price" value="{{ $totalPrice }}">
                <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
                   <div class="col-md-6">
                      <div class="form-group">
@@ -105,7 +115,7 @@
                            id="address_one"
                            name="address_one"
                            placeholder="Address 1"
-                           value="" />
+                           value="{{ auth()->user()->address_one }}" />
                      </div>
                   </div>
                   <div class="col-md-6">
@@ -117,7 +127,7 @@
                            id="address_two"
                            name="address_two"
                            placeholder="Address 2"
-                           value="" />
+                           value="{{ auth()->user()->address_two }}" />
                      </div>
                   </div>
                   <div class="col-md-4">
@@ -151,7 +161,7 @@
                            id="zip_code"
                            name="zip_code"
                            placeholder="Postal Code"
-                           value="" />
+                           value="{{ auth()->user()->zip_code }}" />
                      </div>
                   </div>
                   <div class="col-md-6">
@@ -162,7 +172,18 @@
                            class="form-control"
                            id="phone_number"
                            name="phone_number"
-                           placeholder="Phone Number" />
+                           placeholder="Phone Number"
+                           value="{{ auth()->user()->phone_number }}" />
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="payment_methods">Payment Methods</label>
+                        <select name="payment_methods" class="form-control">
+                           <option value="">Select The Payment Methods</option>
+                           <option value="cod">Bayar di Toko</option>
+                           <option value="transfer">Transfer BCA ke </option>
+                        </select>
                      </div>
                   </div>
                </div>
@@ -180,9 +201,20 @@
                      <div class="product-subtitle">Total</div>
                   </div>
                   <div class="col-8 col-md-3 offset-md-5">
-                     <a
-                        href="{{ route('success') }}"
-                        class="btn btn-success btn-checkout mt-4 px-4 py-2 btn-block">Checkout Now</a>
+                     @if (auth()->user()->address_one == null)
+                        <a href="{{ route('dashboard-setting-account') }}"
+                           class="btn btn-primary px-5">
+                           Add Your Address
+                        </a>
+                     @elseif ($totalPrice == 0)
+                        <button type="submit" class="btn btn-success mt-4 px-4 btn-block" disabled>
+                           Checkout Now
+                        </button>
+                     @else
+                        <button type="submit" class="btn btn-success mt-4 px-4 btn-block">
+                           Checkout Now
+                        </button>
+                     @endif
                   </div>
                </div>
             </form>

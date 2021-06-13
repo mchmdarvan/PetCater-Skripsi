@@ -26,7 +26,7 @@
                               id="crudTable">
                               <thead>
                                  <tr>
-                                    <th>ID</th>
+                                    {{-- <th>ID</th> --}}
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Roles</th>
@@ -55,10 +55,6 @@
             url: '{!! url()->current() !!}',
          },
          columns: [{
-               data: 'id',
-               name: 'id'
-            },
-            {
                data: 'name',
                name: 'name'
             },

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
+use Illuminate\Support\Facades\Auth;
+
 class DashboardController extends Controller
 {
     /**
@@ -11,6 +15,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.dashboard');
+        $recents = TransactionDetail::with(['transaction.user', 'product.galleries'])
+            ->whereHas('transaction', function ($transaction) {
+                $transaction->where('users_id', Auth::user()->id);})
+            ->orderBy('created_at', 'desc');
+        $transactions = Transaction::where('users_id', Auth::user()->id);
+        $total = Transaction::where('users_id', Auth::user()->id);
+        return view('pages.dashboard.dashboard', [
+            'transactions' => $transactions->count(),
+            'total' => $total->sum('total_price'),
+            'recents' => $recents->limit(4)->get(),
+        ]);
     }
 }

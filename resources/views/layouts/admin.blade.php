@@ -41,8 +41,8 @@
                   href="{{ route('category.index') }}"
                   class="list-group-item list-group-item-action {{ request()->is('admin/category*') ? 'active' : '' }}">Categories</a>
                <a
-                  href="#"
-                  class="list-group-item list-group-item-action">Transactions</a>
+                  href="{{ route('transaction.index') }}"
+                  class="list-group-item list-group-item-action {{ request()->is('admin/transaction*') ? 'active' : '' }}">Transactions</a>
                <a
                   href="{{ route('user.index') }}"
                   class="list-group-item list-group-item-action {{ request()->is('admin/user*') ? 'active' : '' }}">User</a>
@@ -84,10 +84,17 @@
                               id="navbarDropdown"
                               role="button"
                               data-toggle="dropdown">
-                              <img
-                                 src="/images/icon-user.png"
-                                 alt=""
-                                 class="rounded-circle mr-2 profile-picture" />
+                              @if (auth()->user()->photo == null)
+                                 <img
+                                    src="/images/icon_user.png"
+                                    alt=""
+                                    class="rounded-circle mr-2 profile-picture" />
+                              @else
+                                 <img
+                                    src="{{ Storage::url(auth()->user()->photo) }}"
+                                    alt=""
+                                    class="rounded-circle mr-2 profile-picture" />
+                              @endif
                               Hi, {{ Auth::user()->name }}
                            </a>
                            <div class="dropdown-menu">
@@ -135,6 +142,9 @@
    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script type="text/javascript"
       src="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.js"></script>
+   <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+   <script src="http://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    <script>
       AOS.init();

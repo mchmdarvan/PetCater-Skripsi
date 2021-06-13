@@ -75,6 +75,9 @@
                         <form action="{{ route('details-add', $product->id) }}" method="POST"
                            enctype="multipart/form-data">
                            @csrf
+                           <input type="number" name="qty" class="form-control"
+                              placeholder="Jumlah">
+                           <br>
                            <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
                               Add to cart
                            </button>
@@ -99,57 +102,40 @@
                </div>
             </div>
          </section>
-         {{-- <section class="store-review">
+         <section class="store-review">
             <div class="container">
                <div class="row">
                   <div class="col-12 col-lg-8 mt-3 mb-3">
-                     <h5>Customer Review (3)</h5>
+                     <h5>Produk yang mungkin anda minati</h5>
                   </div>
                </div>
+               <?php $incrementProduct = 0; ?>
                <div class="row">
-                  <div class="col-12 col-lg-8">
-                     <ul class="list-unstyled">
-                        <li class="media">
-                           <img
-                              src="/images/icon-testimonial-1.png"
-                              alt=""
-                              class="mr-3 rounded-circle" />
-                           <div class="media-body">
-                              <h5 class="mt-2 mb-1">Hazza Risky</h5>
-                              I thought it was not good for living room. I really happy
-                              to decided buy this product last week now feels like
-                              homey.
+                  @foreach ($recomends as $recomend)
+                     <div
+                        class="col-6 col-md-4 col-lg-3"
+                        data-aos="fade-up"
+                        data-aos-delay="{{ $incrementProduct += 0 }}">
+                        <a href="{{ route('details', $recomend->slug) }}"
+                           class="component-products d-block">
+                           <div class="products-thumbnail">
+                              <div
+                                 class="products-image"
+                                 style="
+                                       @if ($recomend->galleries->count()) background-image:
+                                 url('{{ Storage::url($recomend->galleries->first()->photos) }}')
+                              @else
+                                 background-color: #eeeeee @endif
+                                 ">
+                              </div>
                            </div>
-                        </li>
-                        <li class="media">
-                           <img
-                              src="/images/icon-testimonial-2.png"
-                              alt=""
-                              class="mr-3 rounded-circle" />
-                           <div class="media-body">
-                              <h5 class="mt-2 mb-1">Anna Sukkirata</h5>
-                              Color is great with the minimalist concept. Even I thought
-                              it was made by Cactus industry. I do really satisfied with
-                              this.
-                           </div>
-                        </li>
-                        <li class="media">
-                           <img
-                              src="/images/icon-testimonial-3.png"
-                              alt=""
-                              class="mr-3 rounded-circle" />
-                           <div class="media-body">
-                              <h5 class="mt-2 mb-1">Dakimu Wangi</h5>
-                              When I saw at first, it was really awesome to have with.
-                              Just let me know if there is another upcoming product like
-                              this.
-                           </div>
-                        </li>
-                     </ul>
-                  </div>
+                           <div class="products-text">{{ $recomend->name }}</div>
+                           <div class="products-price">@currency($recomend->price)</div>
+                        </a>
+                     </div>
+                  @endforeach
                </div>
-            </div>
-         </section> --}}
+         </section>
       </div>
    </div>
 @endsection

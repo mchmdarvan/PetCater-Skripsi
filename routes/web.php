@@ -21,8 +21,11 @@ Route::get('/categories/{id}', 'CategoriesController@details')->name('categories
 Route::get('/details/{id}', 'DetailsController@index')->name('details');
 Route::post('/details-add/{id}', 'DetailsController@add')->name('details-add');
 
-Route::get('/cart', 'CartsController@index')->name('cart');
-Route::delete('/cart/{id}', 'CartsController@destroy')->name('cart-delete');
+Route::get('/cart', 'CartsController@index')->name('cart')->middleware('auth');
+Route::delete('/cart/{id}', 'CartsController@destroy')->name('cart-delete')->middleware('auth');
+
+Route::post('/checkout', 'CheckoutController@process')->name('checkout');
+
 Route::get('/success', 'CartsController@success')->name('success');
 
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
@@ -46,6 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'admi
     Route::resource('category', 'Admin\CategoryController');
     Route::resource('product', 'Admin\ProductController');
     Route::resource('product-gallery', 'Admin\ProductGalleryController');
+    Route::resource('transaction', 'Admin\TransactionController');
     Route::resource('user', 'Admin\UserController');
     Route::get('change-role/{id}', 'Admin\UserController@changeRole')->name('user.changeRole');
 });

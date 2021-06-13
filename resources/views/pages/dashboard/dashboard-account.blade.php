@@ -79,6 +79,19 @@
                                        value="{{ $user->address_two }}" />
                                  </div>
                               </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="phone_number">Mobile</label>
+                                    <input
+                                       type="text"
+                                       class="form-control"
+                                       id="phone_number"
+                                       name="phone_number"
+                                       value="{{ $user->phone_number }}" />
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="provinces_id">Province</label>
@@ -112,17 +125,7 @@
                                        value="{{ $user->zip_code }}" />
                                  </div>
                               </div>
-                              <div class="col-md-6">
-                                 <div class="form-group">
-                                    <label for="phone_number">Mobile</label>
-                                    <input
-                                       type="text"
-                                       class="form-control"
-                                       id="phone_number"
-                                       name="phone_number"
-                                       value="{{ $user->phone_number }}" />
-                                 </div>
-                              </div>
+
                            </div>
                            <div class="row">
                               <div class="col text-right">
