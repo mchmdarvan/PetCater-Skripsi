@@ -6,9 +6,9 @@
          <div class="container">
             <div class="row align-items-center justify-content-center row-login">
                <div class="col-lg-4">
-                  <h2>
-                     Memulai untuk jual beli <br />
-                     dengan cara terbaru
+                  <h2 class="text-center">
+                     Memenuhi kebutuhan <br />
+                     untuk peliharaan anda
                   </h2>
                   <form class="mt-3" method="POST" action="{{ route('register') }}">
                      @csrf

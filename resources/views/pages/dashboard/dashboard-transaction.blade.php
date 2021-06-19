@@ -32,7 +32,27 @@
                            href="#pills-buy"
                            role="tab"
                            aria-controls="pills-buy"
-                           aria-selected="true">Buy Products</a>
+                           aria-selected="true">Menunggu Pembayaran</a>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <a
+                           class="nav-link"
+                           id="pills-sell-tab"
+                           data-toggle="pill"
+                           href="#pills-sell"
+                           role="tab"
+                           aria-controls="pills-sell"
+                           aria-selected="false">Pembayaran Selesai</a>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <a
+                           class="nav-link"
+                           id="pills-done-tab"
+                           data-toggle="pill"
+                           href="#pills-done"
+                           role="tab"
+                           aria-controls="pills-done"
+                           aria-selected="false">Transaksi Selesai</a>
                      </li>
                   </ul>
                   <!-- Nav Pills Tab Content -->
@@ -43,51 +63,105 @@
                         role="tabpanel"
                         aria-labelledby="pills-buy-tab">
                         @foreach ($transactions as $transaction)
-                           <a href="{{ route('dashboard-transaction-details', $transaction->code) }}"
-                              class="card card-list d-block">
-                              <div class="card-body">
-                                 <div class="row">
-                                    <div class="col-md-1">
-                                       <img
-                                          src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
-                                          class="w-75 rounded" />
-                                    </div>
-                                    <div class="col-md-4">{{ $transaction->product->name ?? '' }}
-                                    </div>
-                                    <div class="col-md-2">{{ $transaction->transaction->code }}</div>
-                                    <div class="col-md-3">
-                                       {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') ?? '' }}
-                                    </div>
-                                    <div class="col-md-2 d-none d-md-block">
-                                       <img
-                                          src="/images/dashboard-arrow-right.svg"
-                                          alt="" />
+                           @if ($transaction->transaction->transaction_status == 'PENDING')
+                              <a href="{{ route('dashboard-transaction-details', $transaction->code) }}"
+                                 class="card card-list d-block">
+                                 <div class="card-body">
+                                    <div class="row">
+                                       <div class="col-md-1">
+                                          <img
+                                             src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
+                                             class="w-75 rounded" />
+                                       </div>
+                                       <div class="col-md-4">{{ $transaction->product->name ?? '' }}
+                                       </div>
+                                       <div class="col-md-2">{{ $transaction->transaction->code }}
+                                       </div>
+                                       <div class="col-md-3">
+                                          {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') ?? '' }}
+                                       </div>
+                                       <div class="col-md-2 d-none d-md-block">
+                                          <img
+                                             src="/images/dashboard-arrow-right.svg"
+                                             alt="" />
+                                       </div>
                                     </div>
                                  </div>
-                              </div>
-                           </a>
+                              </a>
+                           @endif
                         @endforeach
-                        {{-- <a
-                           href="/dashboard-transactions-details.html"
-                           class="card card-list d-block">
-                           <div class="card-body">
-                              <div class="row">
-                                 <div class="col-md-1">
-                                    <img
-                                       src="/images/dashboard-icon-product-1.png"
-                                       alt="" />
+                     </div>
+                     <div
+                        class="tab-pane fade show active"
+                        id="pills-sell"
+                        role="tabpanel"
+                        aria-labelledby="pills-sell-tab">
+                        @foreach ($transactions as $transaction)
+                           @if ($transaction->transaction->transaction_status == 'SHIPPING')
+                              <a href="{{ route('dashboard-transaction-details', $transaction->code) }}"
+                                 class="card card-list d-block">
+                                 <div class="card-body">
+                                    <div class="row">
+                                       <div class="col-md-1">
+                                          <img
+                                             src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
+                                             class="w-75 rounded" />
+                                       </div>
+                                       <div class="col-md-4">{{ $transaction->product->name ?? '' }}
+                                       </div>
+                                       <div class="col-md-2">{{ $transaction->transaction->code }}
+                                       </div>
+                                       <div class="col-md-3">
+                                          {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') ?? '' }}
+                                       </div>
+                                       <div class="col-md-2 d-none d-md-block">
+                                          <img
+                                             src="/images/dashboard-arrow-right.svg"
+                                             alt="" />
+                                       </div>
+                                    </div>
                                  </div>
-                                 <div class="col-md-4">Shirup Marzzan</div>
-                                 <div class="col-md-3">Angga Risky</div>
-                                 <div class="col-md-3">12 Januari, 2020</div>
-                                 <div class="col-md-1 d-none d-md-block">
-                                    <img
-                                       src="/images/dashboard-arrow-right.svg"
-                                       alt="" />
+                              </a>
+                           @endif
+
+                        @endforeach
+
+                     </div>
+                     <div
+                        class="tab-pane fade show active"
+                        id="pills-done"
+                        role="tabpanel"
+                        aria-labelledby="pills-done-tab">
+                        @foreach ($transactions as $transaction)
+                           @if ($transaction->transaction->transaction_status == 'SUCCESS')
+                              <a href="{{ route('dashboard-transaction-details', $transaction->code) }}"
+                                 class="card card-list d-block">
+                                 <div class="card-body">
+                                    <div class="row">
+                                       <div class="col-md-1">
+                                          <img
+                                             src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
+                                             class="w-75 rounded" />
+                                       </div>
+                                       <div class="col-md-4">{{ $transaction->product->name ?? '' }}
+                                       </div>
+                                       <div class="col-md-2">{{ $transaction->transaction->code }}
+                                       </div>
+                                       <div class="col-md-3">
+                                          {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') ?? '' }}
+                                       </div>
+                                       <div class="col-md-2 d-none d-md-block">
+                                          <img
+                                             src="/images/dashboard-arrow-right.svg"
+                                             alt="" />
+                                       </div>
+                                    </div>
                                  </div>
-                              </div>
-                           </div>
-                        </a> --}}
+                              </a>
+                           @endif
+
+                        @endforeach
+
                      </div>
                   </div>
                </div>

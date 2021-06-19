@@ -51,11 +51,11 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        $transaction = Transaction::with(['user'])->findOrFail($id)->first();
-        $details = TransactionDetail::with(['transaction.user', 'product.galleries'])->where('transactions_id', $id)->orderBy('created_at', 'desc')->get();
+        $transaction = Transaction::with(['user'])->findOrFail($id);
+        $details = TransactionDetail::with(['transaction.user', 'product.galleries'])->where('transactions_id', $id)->orderBy('created_at', 'desc');
         return view('pages.admin.transaction.detail', [
             'transaction' => $transaction,
-            'details' => $details,
+            'details' => $details->get(),
         ]);
     }
 

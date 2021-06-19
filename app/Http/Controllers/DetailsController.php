@@ -16,7 +16,7 @@ class DetailsController extends Controller
      */
     public function index($id)
     {
-        $product = Product::with(['galleries'])->where('slug', $id)->firstOrFail();
+        $product = Product::with(['category', 'galleries'])->where('slug', $id)->firstOrFail();
         $recomends = Product::with(['galleries'])->inRandomOrder()->limit(4)->get();
         return view('pages.details', [
             'product' => $product,

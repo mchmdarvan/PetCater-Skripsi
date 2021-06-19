@@ -67,7 +67,7 @@
                <div class="row">
                   <div class="col-lg-8">
                      <h1>{{ $product->name }}</h1>
-                     <div class="owner">By Enzo Petshop and Clinic</div>
+                     <div class="owner">{{ $product->category->name }}</div>
                      <div class="price">@currency($product->price)</div>
                   </div>
                   <div class="col-lg-2" data-aos="zoom-in">
@@ -122,7 +122,7 @@
                               <div
                                  class="products-image"
                                  style="
-                                       @if ($recomend->galleries->count()) background-image:
+                                          @if ($recomend->galleries->count()) background-image:
                                  url('{{ Storage::url($recomend->galleries->first()->photos) }}')
                               @else
                                  background-color: #eeeeee @endif

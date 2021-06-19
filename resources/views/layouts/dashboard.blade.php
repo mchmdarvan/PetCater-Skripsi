@@ -9,8 +9,11 @@
    <meta name="description" content="" />
    <meta name="author" content="" />
 
-   <title><img src="/images/logo-enzo.png">@yield('title')</title>
+   <title>@yield('title')</title>
 
+   <!-- add icon link -->
+   <link rel="icon" href="/images/logo-enzo.png"
+      type="image/x-icon">
    @stack('prepend-style')
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
    <link href="/style/main.css" rel="stylesheet" />

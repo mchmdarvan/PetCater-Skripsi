@@ -18,7 +18,7 @@
                </div>
                <div class="col-lg-5">
                   <h2>
-                     Belanja kebutuhan utama, <br />
+                     Belanja kebutuhan hewan, <br />
                      menjadi lebih mudah
                   </h2>
                   <form method="POST" action="{{ route('login') }}" class="mt-3">

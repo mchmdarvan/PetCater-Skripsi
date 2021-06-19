@@ -3,7 +3,7 @@
    data-aos="fade-down">
    <div class="container">
       <a href="{{ route('home') }}" class="navbar-brand">
-         <img src="{{ url('/images/logo-store.svg') }}" alt="Store" />
+         <img src="{{ url('/images/logoenzo.svg') }}" alt="Store" />
       </a>
       <button
          class="navbar-toggler"

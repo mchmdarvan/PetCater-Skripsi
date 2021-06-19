@@ -10,7 +10,8 @@
    <meta name="author" content="" />
 
    <title>@yield('title')</title>
-
+   <link rel="icon" href="/images/logo-enzo.png"
+      type="image/x-icon">
    @stack('prepend-style')
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
    <link href="/style/main.css" rel="stylesheet" />

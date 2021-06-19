@@ -10,7 +10,8 @@
    <meta name="author" content="" />
 
    <title>@yield('title')</title>
-
+   <link rel="icon" href="/images/logo-enzo.png"
+      type="image/x-icon">
    {{-- Style --}}
    @stack('prepend-style')
    @include('includes.style')
