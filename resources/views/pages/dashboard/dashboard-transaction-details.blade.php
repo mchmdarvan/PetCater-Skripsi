@@ -11,7 +11,7 @@
       data-aos="fade-up">
       <div class="container-fluid">
          <div class="dashboard-heading">
-            <h2 class="dashboard-title">{{ $transaction->code }}</h2>
+            <h2 class="dashboard-title">{{ $transaction->transaction->code }}</h2>
             <p class="dashboard-subtitle">Transactions Details</p>
          </div>
          <div class="dashboard-content" id="transactionDetails">
@@ -63,7 +63,7 @@
                                  <div class="col-12 col-md-6">
                                     <div class="product-title">Quantity</div>
                                     <div class="product-subtitle">
-                                       {{ $transaction->price / $transaction->product->price }} Buah
+                                       {{ $transaction->qty }} Buah
                                     </div>
                                  </div>
                                  <div class="col-12 col-md-6">
@@ -126,6 +126,26 @@
                               </div>
                            </div>
                         </div>
+                        @if ($transaction->transaction->transaction_status == 'FAILED')
+                           <div class="row" style="display: none">
+                              <div class="col-12 text-right">
+                                 <a href="{{ route('dashboard-transaction-failed', $transaction->transaction->id) }}"
+                                    class="btn btn-danger mt-4">
+                                    Failed
+                                 </a>
+                              </div>
+                           </div>
+                        @else
+                           <div class="row">
+                              <div class="col-12 text-right">
+                                 <a href="{{ route('dashboard-transaction-failed', $transaction->transaction->id) }}"
+                                    class="btn btn-danger mt-4">
+                                    Failed
+                                 </a>
+                              </div>
+                           </div>
+                        @endif
+
                      </div>
                   </div>
                </div>
@@ -134,17 +154,3 @@
       </div>
    </div>
 @endsection
-
-@push('addon-script')
-   <script src="/vendor/vue/vue.js"></script>
-   <script>
-      var transactionDetails = new Vue({
-         el: "#transactionDetails",
-         data: {
-            status: "SHIPPING",
-            resi: "TDR300123BSA9",
-         },
-      });
-
-   </script>
-@endpush

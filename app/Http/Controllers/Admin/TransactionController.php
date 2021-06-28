@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
@@ -102,6 +103,22 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
 
         $transaction->delete();
+        return redirect()->route('transaction.index');
+    }
+
+    public function setFailed($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $details = TransactionDetail::with(['product', 'transaction'])->where('transactions_id', $id)->get();
+
+        foreach ($details as $detail) {
+            $product = Product::where('id', $detail->product->id);
+            $product->increment('qty', $detail->qty);
+        }
+
+        $transaction->transaction_status = "FAILED";
+        $transaction->save();
+
         return redirect()->route('transaction.index');
     }
 }

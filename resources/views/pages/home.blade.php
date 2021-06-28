@@ -98,14 +98,18 @@
                         <div class="products-thumbnail">
                            <div
                               class="products-image"
-                              style="
-                                    @if ($product->galleries->count()) background-image:
+                              style="@if ($product->galleries->count()) background-image:
                               url('{{ Storage::url($product->galleries->first()->photos) }}')
                            @else
                               background-color: #eeeeee @endif
                               ">
                            </div>
                         </div>
+                        @if ($product->qty <= 10)
+                           <div class="badge badge-danger products-stock">
+                              tersisa {{ $product->qty }} buah
+                           </div>
+                        @endif
                         <div class="products-text">{{ $product->name }}</div>
                         <div class="products-price">@currency($product->price)</div>
                      </a>

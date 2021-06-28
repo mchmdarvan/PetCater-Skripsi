@@ -13,6 +13,8 @@
    <link rel="icon" href="/images/logo-enzo.png"
       type="image/x-icon">
    @stack('prepend-style')
+   <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
    <link href="/style/main.css" rel="stylesheet" />
    <link rel="stylesheet" type="text/css"
@@ -149,14 +151,12 @@
    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    <script>
       AOS.init();
-
    </script>
    <script>
       $("#menu-toggle").click(function(e) {
          e.preventDefault();
          $("#wrapper").toggleClass("toggled");
       });
-
    </script>
    @stack('addon-script')
 </body>

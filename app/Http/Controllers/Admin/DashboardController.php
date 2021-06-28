@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $totalTransaction = Transaction::where('transaction_status', 'SUCCESS')->orWhere('transaction_status', 'SHIPPING')->sum('total_price');
         $product = Product::count();
-        $recents = Transaction::with(['user'])->orderBy('created_at', 'desc');
+        $recents = Transaction::with(['user'])->orderBy('created_at', 'desc')->take(8);
         $transaction = Transaction::where('transaction_status', 'PENDING')
             ->orWhere('transaction_status', 'SHIPPING')
             ->orWhere('transaction_status', 'SUCCESS')->count();

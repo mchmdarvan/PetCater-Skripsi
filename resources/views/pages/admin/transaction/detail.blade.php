@@ -89,7 +89,8 @@
                               </div>
                               <div class="col-md-3">{{ $detail->code ?? '' }}</div>
                               <div class="col-md-3">
-                                 @currency($detail->product->price)
+                                 @currency($detail->product->price * ($detail->price /
+                                 $detail->product->price))
                               </div>
                               <div class="col-md-2">
                                  {{ $detail->price / $detail->product->price }} Buah

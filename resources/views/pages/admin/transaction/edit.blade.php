@@ -44,7 +44,6 @@
                                        <option value="" disabled>----------------</option>
                                        <option value="PENDING">PENDING</option>
                                        <option value="SHIPPING">SHIPPING</option>
-                                       <option value="FAILED">FAILED</option>
                                        <option value="SUCCESS">SUCCESS</option>
                                     </select>
                                  </div>
@@ -53,7 +52,7 @@
                            <div class="row">
                               <div class="col text-right">
                                  <button type="submit" class="btn btn-success px-5">
-                                    Update Product
+                                    Update Status
                                  </button>
                               </div>
                            </div>
@@ -66,12 +65,3 @@
       </div>
    </div>
 @endsection
-
-
-@push('addon-script')
-   <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-   <script>
-      CKEDITOR.replace('editor');
-
-   </script>
-@endpush

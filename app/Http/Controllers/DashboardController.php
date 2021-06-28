@@ -19,8 +19,8 @@ class DashboardController extends Controller
             ->whereHas('transaction', function ($transaction) {
                 $transaction->where('users_id', Auth::user()->id);})
             ->orderBy('created_at', 'desc');
-        $transactions = Transaction::where('users_id', Auth::user()->id);
-        $total = Transaction::where('users_id', Auth::user()->id);
+        $transactions = Transaction::where('users_id', Auth::user()->id)->where('transaction_status', '!=', 'FAILED');
+        $total = Transaction::where('users_id', Auth::user()->id)->where('transaction_status', '!=', 'FAILED');
         return view('pages.dashboard.dashboard', [
             'transactions' => $transactions->count(),
             'total' => $total->sum('total_price'),

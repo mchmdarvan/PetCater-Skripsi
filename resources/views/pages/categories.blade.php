@@ -61,6 +61,12 @@
                            @else
                               background-color: #eeeeee @endif"></div>
                         </div>
+                        @if ($product->qty <= 10)
+                           <div class="badge badge-danger products-stock text-right"
+                              style="float: right;">
+                              tersisa {{ $product->qty }} buah
+                           </div>
+                        @endif
                         <div class="products-text">{{ $product->name }}</div>
                         <div class="products-price">@currency($product->price)</div>
                      </a>

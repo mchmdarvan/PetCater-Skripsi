@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
@@ -33,12 +34,14 @@ class CheckoutController extends Controller
 
         foreach ($carts as $cart) {
             $trx = 'TRX-' . mt_rand(0000, 9999);
+            $product = Product::where('id', $cart->product->id);
+            $product->decrement('qty', $cart->qty);
 
             TransactionDetail::create([
                 'transactions_id' => $transaction->id,
                 'products_id' => $cart->product->id,
+                'qty' => $cart->qty,
                 'price' => $cart->product->price * $cart->qty,
-                'shipping_status' => 'PENDING',
                 'code' => $trx,
             ]);
         }
@@ -50,4 +53,14 @@ class CheckoutController extends Controller
 
         return redirect()->route('success');
     }
+
+    // public function cancel()
+    // {
+    //     $timeShop = Transaction::where('users_id', Auth::user()->id);
+    //     $dates = Carbon::now()->addHour();
+
+    //     if ($dates $timeShop->created_at < ) {
+    //         $timeShop->transaction_status = 'FAILED';
+    //     }
+    // }
 }

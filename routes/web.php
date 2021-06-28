@@ -33,14 +33,16 @@ Route::get('/register/success', 'Auth\RegisterController@success')->name('regist
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    Route::get('/transactions', 'DashboardTransactionController@index')
+    Route::get('transactions', 'DashboardTransactionController@index')
         ->name('dashboard-transaction');
-    Route::get('/transactions/{id}', 'DashboardTransactionController@details')
+    Route::get('transactions/{id}', 'DashboardTransactionController@details')
         ->name('dashboard-transaction-details');
+    Route::get('transactions/failed/{id}', 'DashboardTransactionController@setFailed')
+        ->name('dashboard-transaction-failed');
 
-    Route::get('/account', 'DashboardSettingController@account')
+    Route::get('account', 'DashboardSettingController@account')
         ->name('dashboard-setting-account');
-    Route::post('/account/{redirect}', 'DashboardSettingController@update')
+    Route::post('account/{redirect}', 'DashboardSettingController@update')
         ->name('dashboard-setting-redirect');
 });
 
@@ -51,7 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'admi
     Route::resource('product-gallery', 'Admin\ProductGalleryController');
     Route::resource('transaction', 'Admin\TransactionController');
     Route::resource('user', 'Admin\UserController');
+    Route::get('failed/{id}', 'Admin\TransactionController@setFailed')->name('transaction.failed');
     Route::get('change-role/{id}', 'Admin\UserController@changeRole')->name('user.changeRole');
 });
-
 Auth::routes();

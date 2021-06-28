@@ -38,7 +38,7 @@
                                        placeholder="Product Name" value="{{ old('name') }}" required>
                                  </div>
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Product Category</label>
                                     <select name="categories_id" class="form-control">
@@ -47,6 +47,13 @@
                                           </option>
                                        @endforeach
                                     </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="number" min="0" name="qty" class="form-control"
+                                       placeholder="Quantity" value="{{ old('qty') }}" required>
                                  </div>
                               </div>
                               <div class="col-md-12">
@@ -85,6 +92,5 @@
    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
    <script>
       CKEDITOR.replace('editor');
-
    </script>
 @endpush

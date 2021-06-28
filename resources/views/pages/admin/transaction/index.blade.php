@@ -26,7 +26,7 @@
                                     <th>Price</th>
                                     <th>Status</th>
                                     <th>Tanggal Pemesanan</th>
-                                    <th>Action</th>
+                                    <th style="width: 30%;">Action</th>
                                  </tr>
                               </thead>
                               <tbody>
@@ -38,37 +38,49 @@
                                        <td>
                                           {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') }}
                                        </td>
-                                       <td>
-                                          <div class="btn-group">
-                                             <div class="dropdown">
-                                                <button
-                                                   class="btn btn-primary dropdown-toggle mr-1 mb-1"
-                                                   type="button"
-                                                   data-toggle="dropdown">
-                                                   Action
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                   <a class="dropdown-item"
-                                                      href="{{ route('transaction.show', $transaction->id) }}">
-                                                      Detail
-                                                   </a>
-                                                   <a class="dropdown-item"
-                                                      href="{{ route('transaction.edit', $transaction->id) }}">
-                                                      Edit
-                                                   </a>
-                                                   <form
-                                                      action="{{ route('transaction.destroy', $transaction->id) }}"
-                                                      method="POST">
-                                                      @csrf
-                                                      @method('delete')
-                                                      <button type="submit"
-                                                         class="dropdown-item text-danger">
-                                                         Delete
-                                                      </button>
-                                                   </form>
-                                                </div>
-                                             </div>
-                                          </div>
+                                       <td style="width: 30%;">
+                                          <a class="btn btn-primary"
+                                             href="{{ route('transaction.show', $transaction->id) }}"
+                                             title="Detail"><span
+                                                class="fa fa-book"></span>
+                                          </a>
+                                          @if ($transaction->transaction_status == 'FAILED')
+                                             <a class="btn btn-success disabled"
+                                                href="{{ route('transaction.edit', $transaction->id) }}"
+                                                title="Success"><span
+                                                   class="fa fa-check">
+                                             </a>
+                                          @else
+                                             <a class="btn btn-success"
+                                                href="{{ route('transaction.edit', $transaction->id) }}"
+                                                title="Success"><span
+                                                   class="fa fa-check">
+                                             </a>
+                                          @endif
+
+                                          @if ($transaction->transaction_status == 'FAILED')
+                                             <a class="btn btn-danger disabled"
+                                                href="{{ route('transaction.failed', $transaction->id) }}"
+                                                title="Failed"><span
+                                                   class="fa fa-close"></a>
+                                          @else
+                                             <a class="btn btn-danger"
+                                                href="{{ route('transaction.failed', $transaction->id) }}"
+                                                title="Failed"><span
+                                                   class="fa fa-close"></a>
+                                          @endif
+
+                                          {{-- <form
+                                             action="{{ route('transaction.destroy', $transaction->id) }}"
+                                             method="POST">
+                                             @csrf
+                                             @method('delete')
+                                             <button type="submit"
+                                                class="btn btn-danger">
+                                                <span
+                                                   class="fa fa-address-book">
+                                             </button>
+                                          </form> --}}
                                        </td>
                                     </tr>
                                  @endforeach

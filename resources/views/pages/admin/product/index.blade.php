@@ -28,6 +28,7 @@
                                  <tr>
                                     <th>Name</th>
                                     <th>Category</th>
+                                    <th>Stock</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                  </tr>
@@ -62,6 +63,10 @@
                name: 'category.name'
             },
             {
+               data: 'qty',
+               name: 'qty'
+            },
+            {
                data: 'price',
                name: 'price',
                render: $.fn.dataTable.render.number('.', ',', 2, 'Rp ')
@@ -75,6 +80,5 @@
             },
          ]
       })
-
    </script>
 @endpush

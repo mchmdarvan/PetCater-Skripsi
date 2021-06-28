@@ -45,4 +45,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'provinces_id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regencies_id');
+    }
 }

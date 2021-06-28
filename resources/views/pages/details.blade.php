@@ -27,7 +27,7 @@
          </div>
       </section>
 
-      <section class="store-gallery" id="gallery">
+      <section class="store-gallery mb-3" id="gallery">
          <div class="container">
             <div class="row">
                <div class="col-lg-8" data-aos="zoom-in">
@@ -69,16 +69,32 @@
                      <h1>{{ $product->name }}</h1>
                      <div class="owner">{{ $product->category->name }}</div>
                      <div class="price">@currency($product->price)</div>
+                     @if ($product->qty <= 10)
+                        <div class="stock text-danger">
+                           stock <b>tersisa <{{ $product->qty }} </b> buah
+                        </div>
+                     @endif
                   </div>
                   <div class="col-lg-2" data-aos="zoom-in">
                      @auth
                         <form action="{{ route('details-add', $product->id) }}" method="POST"
                            enctype="multipart/form-data">
                            @csrf
-                           <input type="number" name="qty" class="form-control"
-                              placeholder="Jumlah">
-                           <br>
-                           <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
+                           <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                 <button class="btn btn-danger" type="button" id="btnMinus">-</button>
+                              </div>
+                              <input type="number" name="qty" value="1" id="textVal" min="0"
+                                 max="{{ $product->qty }}"
+                                 class="form-control"
+                                 placeholder="Jumlah">
+                              <div class="input-group-append">
+                                 <button class="btn btn-success" type="button" id="btnPlus">+</button>
+                              </div>
+                           </div>
+                           {{-- <button type="button" id="btnPlus" class="add">+</button> --}}
+                           <button type="submit"
+                              class="btn btn-success px-4 text-white btn-block mb-3">
                               Add to cart
                            </button>
                         </form>
@@ -122,7 +138,7 @@
                               <div
                                  class="products-image"
                                  style="
-                                          @if ($recomend->galleries->count()) background-image:
+                                                                                                                              @if ($recomend->galleries->count()) background-image:
                                  url('{{ Storage::url($recomend->galleries->first()->photos) }}')
                               @else
                                  background-color: #eeeeee @endif
@@ -164,8 +180,22 @@
             },
          },
       });
-
    </script>
 
-   <script src="script/navbar-scroll.js"></script>
+   <script>
+      $('#btnPlus').click(function() {
+         let textNow = $('#textVal').val();
+         textNow = parseInt(textNow);
+         textNow += 1;
+         $('#textVal').val(textNow);
+      });
+   </script>
+   <script>
+      $('#btnMinus').click(function() {
+         let textNow = $('#textVal').val();
+         textNow = parseInt(textNow);
+         textNow -= 1;
+         $('#textVal').val(textNow);
+      });
+   </script>
 @endpush

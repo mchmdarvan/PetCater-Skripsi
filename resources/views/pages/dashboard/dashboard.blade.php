@@ -35,6 +35,40 @@
             <div class="row mt-3">
                <div class="col-12 mt-2">
                   <h5 class="mb-3">Recent Transactions</h5>
+                  {{-- <div class="card">
+                     <div class="card-body">
+                        <div class="table-responsive">
+                           <table class="table table-hover scroll-horizontal-vertical w-100">
+                              <thead>
+                                 <tr>
+                                    <th>Store Code</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Tanggal Pemesanan</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 @foreach ($recents as $recent)
+                                    <tr>
+                                       <td>{{ $recent->code }}</td>
+                                       <td>@currency($recent->total_price)</td>
+                                       <td>{{ $recent->transaction_status }}</td>
+                                       <td>
+                                          {{ $recent->created_at->isoFormat('dddd, D MMMM Y') }}
+                                       </td>
+                                       <td>
+                                          <a
+                                             href="{{ route('dashboard-transaction-details', $recent->id) }}"
+                                             class="btn btn-success">Detail</a>
+                                       </td>
+                                    </tr>
+                                 @endforeach
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div> --}}
                   @foreach ($recents as $recent)
                      <a href="{{ route('dashboard-transaction-details', $recent->code) }}"
                         class="card card-list d-block">

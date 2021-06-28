@@ -41,7 +41,7 @@
                                        class="form-control">
                                  </div>
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Category Product</label>
                                     <select name="categories_id" class="form-control">
@@ -53,6 +53,13 @@
                                           </option>
                                        @endforeach
                                     </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="number" name="qty" value="{{ $item->qty }}"
+                                       class="form-control">
                                  </div>
                               </div>
                               <div class="col-md-12">
@@ -93,6 +100,5 @@
    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
    <script>
       CKEDITOR.replace('editor');
-
    </script>
 @endpush
