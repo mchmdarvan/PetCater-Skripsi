@@ -60,6 +60,11 @@
                      </table>
                   </div>
                </div>
+               <div class="col-12 text-right">
+                  <a href="https://api.whatsapp.com/send?phone=+6281290906434"
+                     class="btn btn-success mt-4">Ingin membuat janji temu?
+                  </a>
+               </div>
             </div>
          </div>
       </section>

@@ -158,7 +158,7 @@
                                     Failed
                                  </a>
                                  @if ($transaction->transaction->payment_methods == 'transfer')
-                                    <a href="https://api.whatsapp.com/send?phone=+6285894525693"
+                                    <a href="https://api.whatsapp.com/send?phone=+6281290906434"
                                        class="btn btn-success mt-4">Konfirmasi Pembayaran
                                     </a>
                                  @endif
