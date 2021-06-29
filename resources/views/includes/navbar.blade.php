@@ -15,14 +15,17 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
          <ul class="navbar-nav ml-auto">
             <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-               <a href="{{ route('home') }}" class="nav-link">Home</a>
+               <a href="{{ route('home') }}" class="nav-link">Beranda</a>
             </li>
             <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
-               <a href="{{ route('category') }}" class="nav-link">Categories</a>
+               <a href="{{ route('category') }}" class="nav-link">Kategori</a>
+            </li>
+            <li class="nav-item {{ request()->is('schedule') ? 'active' : '' }}">
+               <a href="{{ route('schedule') }}" class="nav-link">Jadwal Dokter</a>
             </li>
             @guest
                <li class="nav-item">
-                  <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
+                  <a href="{{ route('register') }}" class="nav-link">Daftar</a>
                </li>
                <li class="nav-item">
                   <a

@@ -21,4 +21,9 @@ class HomeController extends Controller
             'products' => $products,
         ]);
     }
+
+    public function schedule()
+    {
+        return view('pages.schedule');
+    }
 }

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/schedule', 'HomeController@schedule')->name('schedule');
+
 Route::get('/categories', 'CategoriesController@index')->name('category');
 Route::get('/categories/{id}', 'CategoriesController@details')->name('categories-details');
 

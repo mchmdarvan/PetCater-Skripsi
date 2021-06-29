@@ -179,10 +179,10 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label for="payment_methods">Payment Methods</label>
-                        <select name="payment_methods" class="form-control">
+                        <select name="payment_methods" id="methods" class="form-control">
                            <option value="">Select The Payment Methods</option>
                            <option value="cod">Bayar di Toko</option>
-                           <option value="transfer">Transfer BCA ke </option>
+                           <option value="transfer">Transfer BCA ke 1660016909 A/N Dhiah Rahma</option>
                         </select>
                      </div>
                   </div>
@@ -211,7 +211,8 @@
                            Checkout Now
                         </button>
                      @else
-                        <button type="submit" class="btn btn-success mt-4 px-4 btn-block">
+                        <button id="checkout" type="submit"
+                           class="btn btn-success mt-4 px-4 btn-block">
                            Checkout Now
                         </button>
                      @endif
@@ -262,6 +263,10 @@
             }
          }
       });
-
+   </script>
+   <script>
+      $('#methods').on('change', function() {
+         $('#checkout').prop('disabled', !$(this).val());
+      }).trigger('change');
    </script>
 @endpush

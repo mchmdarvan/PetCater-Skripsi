@@ -15,10 +15,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
          <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-               <a href="{{ route('home') }}" class="nav-link">Home</a>
+               <a href="{{ route('home') }}" class="nav-link">Beranda</a>
             </li>
             <li class="nav-item">
-               <a href="{{ route('category') }}" class="nav-link">Categories</a>
+               <a href="{{ route('category') }}" class="nav-link">Kategori</a>
+            </li>
+            <li class="nav-item">
+               <a href="{{ route('schedule') }}" class="nav-link">Jadwal Dokter</a>
             </li>
          </ul>
       </div>

@@ -84,7 +84,8 @@
                               <div class="input-group-prepend">
                                  <button class="btn btn-danger" type="button" id="btnMinus">-</button>
                               </div>
-                              <input type="number" name="qty" value="1" id="textVal" min="0"
+                              <input type="number" name="qty" onkeyup="myFunction(this)" value="1"
+                                 id="textVal" min="0"
                                  max="{{ $product->qty }}"
                                  class="form-control"
                                  placeholder="Jumlah">
@@ -92,8 +93,7 @@
                                  <button class="btn btn-success" type="button" id="btnPlus">+</button>
                               </div>
                            </div>
-                           {{-- <button type="button" id="btnPlus" class="add">+</button> --}}
-                           <button type="submit"
+                           <button id="btnCart" type="submit"
                               class="btn btn-success px-4 text-white btn-block mb-3">
                               Add to cart
                            </button>
@@ -138,7 +138,7 @@
                               <div
                                  class="products-image"
                                  style="
-                                                                                                                              @if ($recomend->galleries->count()) background-image:
+                                                                                                                                                                     @if ($recomend->galleries->count()) background-image:
                                  url('{{ Storage::url($recomend->galleries->first()->photos) }}')
                               @else
                                  background-color: #eeeeee @endif
@@ -197,5 +197,14 @@
          textNow -= 1;
          $('#textVal').val(textNow);
       });
+   </script>
+
+   <script>
+      function myFunction(el) {
+         if (Number(el.value) > {{ $product->qty }})
+            document.getElementById('btnCart').disabled = true;
+         else
+            document.getElementById('btnCart').disabled = false;
+      }
    </script>
 @endpush
