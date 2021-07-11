@@ -12,11 +12,11 @@
    <title>@yield('title')</title>
 
    <!-- add icon link -->
-   <link rel="icon" href="/images/logo-enzo.png"
+   <link rel="icon" href="{{ URL::asset('images/logo-enzo.png') }}"
       type="image/x-icon">
    @stack('prepend-style')
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-   <link href="/style/main.css" rel="stylesheet" />
+   <link href="{{ URL::asset('style/main.css') }}" rel="stylesheet" />
    @stack('addon-style')
 </head>
 
@@ -26,7 +26,8 @@
          <!-- Sidebar -->
          <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading text-center">
-               <img src="/images/logo-enzo.png" class="my-4" style="width: 150px" />
+               <img src="{{ URL::asset('images/logo-enzo.png') }}" class="my-4"
+                  style="width: 150px" />
             </div>
             <div class="list-group list-group-flush">
                <a
@@ -82,7 +83,7 @@
                               data-toggle="dropdown">
                               @if (auth()->user()->photo == null)
                                  <img
-                                    src="/images/icon_user.png"
+                                    src="{{ URL::asset('images/icon_user.png') }}"
                                     alt=""
                                     class="rounded-circle mr-2 profile-picture" />
                               @else
@@ -113,10 +114,10 @@
                                  $carts = \App\Models\Cart::where('users_id', auth()->user()->id)->count();
                               @endphp
                               @if ($carts > 0)
-                                 <img src="/images/icon-cart-filled.svg" />
+                                 <img src="{{ URL::asset('images/icon-cart-filled.svg') }}" />
                                  <div class="card-badge">{{ $carts }}</div>
                               @else
-                                 <img src="/images/icon-cart-empty.svg" />
+                                 <img src="{{ URL::asset('images/icon-cart-empty.svg') }}" />
                               @endif
                            </a>
                         </li>
@@ -144,19 +145,17 @@
 
    <!-- Bootstrap core JavaScript -->
    @stack('prepend-script')
-   <script src="/vendor/jquery/jquery.slim.min.js"></script>
-   <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="{{ URL::asset('vendor/jquery/jquery.slim.min.js') }}"></script>
+   <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    <script>
       AOS.init();
-
    </script>
    <script>
       $("#menu-toggle").click(function(e) {
          e.preventDefault();
          $("#wrapper").toggleClass("toggled");
       });
-
    </script>
    @stack('addon-script')
 </body>

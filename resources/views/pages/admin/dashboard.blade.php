@@ -18,7 +18,7 @@
                <div class="col-md-4">
                   <div class="card mb-2">
                      <div class="card-body">
-                        <div class="dashboard-card-title mb-2">Total Transaction</div>
+                        <div class="dashboard-card-title mb-2">Total Transaksi Masuk</div>
                         <div class="dashboard-card-subtitle">@currency($totalTransaction)</div>
                      </div>
                   </div>
@@ -26,7 +26,51 @@
                <div class="col-md-4">
                   <div class="card mb-2">
                      <div class="card-body">
-                        <div class="dashboard-card-title mb-2">Product</div>
+                        <div class="dashboard-card-title mb-2">Total Transaction Bulan Ini</div>
+                        <div class="dashboard-card-subtitle">@currency($transactionMonth)</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-2">
+                     <div class="card-body">
+                        <div class="dashboard-card-title mb-2">Jumlah Transaksi</div>
+                        <div class="dashboard-card-subtitle">{{ $transaction }}</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="card mb-2">
+                     <div class="card-body">
+                        <div class="dashboard-card-title mb-2">Jumlah Transaksi Pending</div>
+                        <div class="dashboard-card-subtitle">{{ $pending }}</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-2">
+                     <div class="card-body">
+                        <div class="dashboard-card-title mb-2">Jumlah Transaksi Gagal</div>
+                        <div class="dashboard-card-subtitle">{{ $failed }}</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-2">
+                     <div class="card-body">
+                        <div class="dashboard-card-title mb-2">Jumlah Transaksi Berhasil</div>
+                        <div class="dashboard-card-subtitle">{{ $success }}</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="card mb-2">
+                     <div class="card-body">
+                        <div class="dashboard-card-title mb-2">Total Produk</div>
                         <div class="dashboard-card-subtitle">{{ $product }}</div>
                      </div>
                   </div>
@@ -34,8 +78,16 @@
                <div class="col-md-4">
                   <div class="card mb-2">
                      <div class="card-body">
-                        <div class="dashboard-card-title mb-2">Transaction</div>
-                        <div class="dashboard-card-subtitle">{{ $transaction }}</div>
+                        <div class="dashboard-card-title mb-2">Stock Produk Terjual</div>
+                        <div class="dashboard-card-subtitle">{{ $sell }}</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-2">
+                     <div class="card-body">
+                        <div class="dashboard-card-title mb-2">Stock Produk Terjual Bulan Ini</div>
+                        <div class="dashboard-card-subtitle">{{ $sellMonth }}</div>
                      </div>
                   </div>
                </div>

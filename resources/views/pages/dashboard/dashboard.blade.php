@@ -85,7 +85,7 @@
                                  {{ $recent->created_at->isoFormat('dddd, D MMMM Y') ?? '' }}</div>
                               <div class="col-md-2 d-none d-md-block">
                                  <img
-                                    src="/images/dashboard-arrow-right.svg"
+                                    src="{{ URL::asset('images/dashboard-arrow-right.svg') }}"
                                     alt="" />
                               </div>
                            </div>

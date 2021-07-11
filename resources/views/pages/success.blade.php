@@ -11,7 +11,7 @@
             <div
                class="row align-items-center row-successs justify-content-center">
                <div class="col-lg-6 text-center">
-                  <img src="{{ url('/images/icon-success.svg') }}" alt="" class="mb-4" />
+                  <img src="{{ URL::asset('images/icon-success.svg') }}" alt="" class="mb-4" />
                   <h2>Transaction Processed!</h2>
                   <p>
                      Silahkan tunggu konfirmasi email dari kami dan kami akan

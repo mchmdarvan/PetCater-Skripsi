@@ -138,7 +138,7 @@
                               <div
                                  class="products-image"
                                  style="
-                                                                                                                                                                     @if ($recomend->galleries->count()) background-image:
+                                                                                                                                                                                    @if ($recomend->galleries->count()) background-image:
                                  url('{{ Storage::url($recomend->galleries->first()->photos) }}')
                               @else
                                  background-color: #eeeeee @endif
@@ -157,7 +157,7 @@
 @endsection
 
 @push('addon-script')
-   <script src="/vendor/vue/vue.js"></script>
+   <script src="{{ URL::asset('vendor/vue/vue.js') }}"></script>
    <script>
       var gallery = new Vue({
          el: "#gallery",

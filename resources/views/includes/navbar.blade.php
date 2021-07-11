@@ -3,7 +3,7 @@
    data-aos="fade-down">
    <div class="container">
       <a href="{{ route('home') }}" class="navbar-brand">
-         <img src="{{ url('/images/logoenzo.svg') }}" alt="Store" />
+         <img src="{{ url('images/logoenzo.svg') }}" alt="Store" />
       </a>
       <button
          class="navbar-toggler"
@@ -46,7 +46,7 @@
                      data-toggle="dropdown">
                      @if (auth()->user()->photo == null)
                         <img
-                           src="/images/icon_user.png"
+                           src="{{ URL::asset('images/icon_user.png') }}"
                            alt=""
                            class="rounded-circle mr-2 profile-picture" />
                      @else
@@ -84,10 +84,10 @@
                            $carts = \App\Models\Cart::where('users_id', auth()->user()->id)->count();
                         @endphp
                         @if ($carts > 0)
-                           <img src="/images/icon-cart-filled.svg" />
+                           <img src="{{ URL::asset('images/icon-cart-filled.svg') }}" />
                            <div class="card-badge">{{ $carts }}</div>
                         @else
-                           <img src="/images/icon-cart-empty.svg" />
+                           <img src="{{ URL::asset('images/icon-cart-empty.svg') }}" />
                         @endif
                      </a>
                   @else

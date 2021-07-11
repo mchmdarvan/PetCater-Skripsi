@@ -16,7 +16,7 @@
    <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-   <link href="/style/main.css" rel="stylesheet" />
+   <link href="{{ URL::asset('style/main.css') }}" rel="stylesheet" />
    <link rel="stylesheet" type="text/css"
       href="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.css" />
    @stack('addon-style')
@@ -28,7 +28,8 @@
          <!-- Sidebar -->
          <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading text-center">
-               <img src="/images/admin.png" class="my-4" style="width: 150px" />
+               <img src="{{ URL::asset('images/logo-enzo.png') }}" class="my-4"
+                  style="width: 150px" />
             </div>
             <div class="list-group list-group-flush">
                <a
@@ -89,7 +90,7 @@
                               data-toggle="dropdown">
                               @if (auth()->user()->photo == null)
                                  <img
-                                    src="/images/icon_user.png"
+                                    src="{{ URL::asset('images/icon_user.png') }}"
                                     alt=""
                                     class="rounded-circle mr-2 profile-picture" />
                               @else
@@ -111,6 +112,20 @@
                                  @csrf
                               </form>
                            </div>
+                        </li>
+                        <li class="nav-item">
+                           <a href="{{ route('transaction.index') }}"
+                              class="nav-link d-inline-block mt-2">
+                              @php
+                                 $carts = \App\Models\Transaction::where('transaction_status', 'PENDING')->count();
+                              @endphp
+                              @if ($carts > 0)
+                                 <img src="{{ URL::asset('images/icon-bell-filled.svg') }}" />
+                                 <div class="card-badge">{{ $carts }}</div>
+                              @else
+                                 <img src="{{ URL::asset('images/icon-bell-empty.svg') }}" />
+                              @endif
+                           </a>
                         </li>
                      </ul>
 
@@ -141,8 +156,10 @@
 
    <!-- Bootstrap core JavaScript -->
    @stack('prepend-script')
-   <script src="/vendor/jquery/jquery.min.js"></script>
-   <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
+   <script
+      src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}">
+   </script>
    <script type="text/javascript"
       src="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.js"></script>
    <script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
