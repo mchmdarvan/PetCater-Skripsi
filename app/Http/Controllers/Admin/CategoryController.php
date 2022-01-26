@@ -77,9 +77,12 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $data['photo'] = $request->file('photo')->store('assets/category', 's3');
 
         Category::create($data);
+        echo "<pre>";
+        print_r($data);
+        die;
 
         return redirect()->route('category.index');
     }

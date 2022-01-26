@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductGallery;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use Storage;
 
 class ProductGalleryController extends Controller
 {
@@ -67,9 +67,19 @@ class ProductGalleryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'photos' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'products_id' => 'required|exists:products,id'
+        ]);
+
+        $imageName = time().'.'.$request->photos->extension();  
+     
+        $path = Storage::disk('s3')->put('photos', $request->photos);
+        $path = Storage::disk('s3')->url($path);
+
         $data = $request->all();
 
-        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
+        // $data['photos'] = $request->file('photos')->storeAs('assets/product', 'public');
         ProductGallery::create($data);
 
         return redirect()->route('product-gallery.index');

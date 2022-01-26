@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'admi
     Route::resource('product-gallery', 'Admin\ProductGalleryController');
     Route::resource('transaction', 'Admin\TransactionController');
     Route::resource('user', 'Admin\UserController');
+    Route::get('report', 'Admin\DashboardController@report')->name('admin-report');
     Route::get('failed/{id}', 'Admin\TransactionController@setFailed')->name('transaction.failed');
     Route::get('change-role/{id}', 'Admin\UserController@changeRole')->name('user.changeRole');
 });

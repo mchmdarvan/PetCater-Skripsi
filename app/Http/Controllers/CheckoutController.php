@@ -6,8 +6,10 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Mail\CheckoutNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -50,6 +52,10 @@ class CheckoutController extends Controller
         Cart::with(['product', 'user'])
             ->where('users_id', Auth::user()->id)
             ->delete();
+        
+        Mail::to($user->email)->send(new CheckoutNotification([
+            'email' => $user->email,
+        ]));
 
         return redirect()->route('success');
     }

@@ -48,6 +48,9 @@
                   href="{{ route('transaction.index') }}"
                   class="list-group-item list-group-item-action {{ request()->is('admin/transaction*') ? 'active' : '' }}">Transactions</a>
                <a
+                  href="{{ route('admin-report') }}"
+                  class="list-group-item list-group-item-action {{ request()->is('admin/report*') ? 'active' : '' }}">Report</a>
+               <a
                   href="{{ route('user.index') }}"
                   class="list-group-item list-group-item-action {{ request()->is('admin/user*') ? 'active' : '' }}">User</a>
                <a href="{{ route('logout') }}"
@@ -132,7 +135,7 @@
                      <!-- Mobile Menu -->
                      <ul class="navbar-nav d-block d-lg-none">
                         <li class="nav-item">
-                           <a href="#" class="nav-link"> Hi, Angga </a>
+                           <a href="#" class="nav-link"> Hi, {{ Auth::user()->name }}</a>
                         </li>
                         <li class="nav-item">
                            <a href="{{ route('logout') }}"
